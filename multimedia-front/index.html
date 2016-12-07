@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+Visca Ewe
+</title>
+</head>
+<body>
+<h2> VISCA - zdalne sterowanie kamera </h2>
+
+<textarea id="response" rows="5" cols="30" >
+</textarea> </br></br>
+<button type="button" onclick="left()">LEFT</button>
+<button type="button" onclick="right()">RIGHT</button>
+<button type="button" onclick="up()">UP</button>
+<button type="button" onclick="down()">DOWN</button>
+<button type="button" onclick="home()">HOME</button>
+<button type="button" onclick="tele()">TELE</button>
+<button type="button" onclick="wide()">WIDE</button>
+</br></br></br>
+Speed1: <input id="sp1" type="number" value="3"></br>
+Speed2: <input id="sp2" type="number" value="3"></br></br>
+<button type="button" onclick="speed()">SET SPEED</button>
+Speed1: <input id="sp3" type="text" ></br>
+<button type="button" onclick="makro()">MAKRO</button>
+
+<script>
+function opener(htp){
+	htp.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 200){
+			document.getElementById("response").value =
+			this.responseText + "\n" + document.getElementById("response").value;
+		}
+	};
+}
+function makro(){
+	var makro = document.getElementById("sp3").value;
+	var params = "m="+makro;
+console.log(params);
+	var xhttp = new XMLHttpRequest();
+	opener(xhttp);
+	xhttp.open("GET", "http://localhost:8080/makro/"+params, true);
+	xhttp.send();
+}
+function speed(){
+	var speed1 = document.getElementById("sp1").value;
+	var speed2 = document.getElementById("sp2").value;
+	var params = "sp1="+speed1+"&sp2="+speed2;
+console.log(params);
+	var xhttp = new XMLHttpRequest();
+	opener(xhttp);
+	xhttp.open("GET", "http://localhost:8080/speed/"+params, true);
+	xhttp.send();
+}
+function left(){
+	var xhttp = new XMLHttpRequest();
+	opener(xhttp);
+	xhttp.open("GET", "http://localhost:8080/left", true);
+	xhttp.send();
+}
+function right(){
+	var xhttp = new XMLHttpRequest();
+	opener(xhttp);
+	xhttp.open("GET", "http://localhost:8080/right", true);
+	xhttp.send();
+}
+function up(){
+	var xhttp = new XMLHttpRequest();
+	opener(xhttp);
+	xhttp.open("GET", "http://localhost:8080/up", true);
+	xhttp.send();
+}
+function down(){
+	var xhttp = new XMLHttpRequest();
+	opener(xhttp);
+	xhttp.open("GET", "http://localhost:8080/down", true);
+	xhttp.send();
+}
+function tele(){
+	var xhttp = new XMLHttpRequest();
+	opener(xhttp);
+	xhttp.open("GET", "http://localhost:8080/tele", true);
+	xhttp.send();
+}
+function wide(){
+	var xhttp = new XMLHttpRequest();
+	opener(xhttp);
+	xhttp.open("GET", "http://localhost:8080/wide", true);
+	xhttp.send();
+}
+function home(){
+	var xhttp = new XMLHttpRequest();
+	opener(xhttp);
+	xhttp.open("GET", "http://localhost:8080/home", true);
+	xhttp.send();
+}
+</script>
+</body>
+</html>
