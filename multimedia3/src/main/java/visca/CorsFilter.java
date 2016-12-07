@@ -20,7 +20,7 @@ public class CorsFilter implements Filter {
 
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         resp.addHeader("Access-Control-Allow-Origin","*");
-        resp.addHeader("Access-Control-Allow-Methods","GET,POST");
+        resp.addHeader("Access-Control-Allow-Methods","GET");
         resp.addHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
 
         // Just ACCEPT and REPLY OK if OPTIONS

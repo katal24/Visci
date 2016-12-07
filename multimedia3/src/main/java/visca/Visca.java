@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 //import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,13 +28,20 @@ public class Visca {
     static private byte speed2 = 3;
     static ArrayList<String> macros;
     static private String response;
-
+    static private String aa;
     public Visca(){
-        Scanner in = new Scanner(System.in);
 
         serialPort = new SerialPort(commName);
+
         commName = "COM1";
         macros = new ArrayList<String>();
+        try {
+            serialPort.openPort();
+            serialPort.setParams(9600, 8, 1, 0);
+        } catch (SerialPortException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static byte[] readResponseHelp(SerialPort serialPort){
@@ -80,6 +86,7 @@ public class Visca {
     @RequestMapping(value = "/up")
     @ResponseBody
     public String up(){
+        System.out.print("############ " + aa);
         try {
             MoveUp.move(serialPort, speed1, speed2);
         } catch (SerialPortException e) {
